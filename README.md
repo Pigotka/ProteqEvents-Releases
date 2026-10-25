@@ -15,6 +15,21 @@ Silent install:
 msiexec /i ProteqEvents-<version>.msi /qn
 ```
 
+## Update from the Start menu
+
+From version 1.1.0 the installer adds an **Update ProteqEvents** shortcut to the Start menu. Run it on each machine with the plugin and accept the administrator prompt. It shows the installed and latest versions and, if a newer one is available, asks before installing it. Updating restarts Event Server, so alarms and rules pause briefly; close Management Client first.
+
+The update downloads the MSI from this page, checks its SHA-256 checksum and installs it. If it fails, it shows the path of the install log to send us (in `%PROGRAMDATA%\Milestone\ProteqEvents\Logs`).
+
+From an administrator **Command Prompt**, the same script can only check for updates, or update without asking (for a scheduled task):
+
+```
+powershell -ExecutionPolicy Bypass -File "%PROGRAMFILES%\Milestone\MIPPlugins\ProteqEvents\Update-ProteqEvents.ps1" -CheckOnly
+powershell -ExecutionPolicy Bypass -File "%PROGRAMFILES%\Milestone\MIPPlugins\ProteqEvents\Update-ProteqEvents.ps1" -Yes
+```
+
+If you have version 1.0.0, install the latest MSI manually once to get the shortcut.
+
 ## If something goes wrong
 
 Run the installer again with logging turned on, then send us the log file. Open **Command Prompt** in the folder where you saved the MSI and run (use the version you downloaded):
